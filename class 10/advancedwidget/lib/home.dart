@@ -1,4 +1,7 @@
+import 'package:advancedwidget/register.dart';
 import 'package:flutter/material.dart';
+
+import 'login.dart';
 
 
 class Home extends StatefulWidget {
@@ -8,15 +11,74 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  var lst=['Ali','Ahmed','Asma','alishba'];
+  var text = '0';
+  one () {
+    setState(() {
+      text = '1';
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Text('yoo')
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+          Text('Value $text'),
+          SizedBox(height: 20,),
+          ElevatedButton(onPressed: one, child: Text('Make  1')),
+          SizedBox(height: 20,),
+          ElevatedButton(onPressed: (){
+            setState(() {
+              text='2';
+             });
+          },
+           child: Text('Make2')),
+        ],),
+      ),
     );
   }
 }
 
+
+
+
+
+
+//Tabs BAr
+// return DefaultTabController(length: 2, child: Scaffold(
+//       appBar: AppBar(
+//         title: Center(child: Text('Home')),
+//         backgroundColor: Colors.red,
+//         foregroundColor: Colors.white,
+//         bottom: TabBar(
+//         indicatorColor: Colors.white,
+//         labelColor: Colors.white,
+//         unselectedLabelColor: Colors.white,
+//         tabs: [
+//         Tab(child: Text('Login'),),
+//         Tab(child: Text('Register'),),
+//       ],),),
+//       body: TabBarView(children: [
+//         LoginPage(),
+//         RegisterPage(),
+//       ],),
+//     ));
+
+
+//Drawer
+// Scaffold(
+//       appBar: AppBar(title: Text('Drawer Exapmle'),),
+//       drawer: Drawer(child: ListView(
+//       children: [
+//         DrawerHeader(child: Container(color: Colors.red,child: Text('Drawer HEader Like Image/Logo'))),
+//         ListTile(title: Text('Screen1'),),
+//         ListTile(title: Text('Screen2'),),
+//         GestureDetector(child: ListTile(title: Text('Login')),onTap: () => Navigator.of(context).push(new MaterialPageRoute(
+//                     builder: (BuildContext context) => new LoginPage())),),
+//       ],
+//     ),),
+//     );
 
 // GridView
 // GridView.count(

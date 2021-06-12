@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'bottomnavigation.dart';
 import 'home.dart';
 
 void main() {
@@ -16,7 +17,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Home(),
+      home: BottomNavigation(),
     );
   }
 }
