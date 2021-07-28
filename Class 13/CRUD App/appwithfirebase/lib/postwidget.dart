@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class PostWidget extends StatelessWidget {
+  final Map data;
+  PostWidget({this.data});
 
   @override
   Widget build(BuildContext context) {
@@ -21,10 +23,10 @@ class PostWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-            Image.network('https://freepngimg.com/thumb/spiderman/1-2-spider-man-download-png-thumb.png'
+            Image.network(data["url"]
             ,width: 100,height: 100,),
-          Text('Spiderman',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 21),),
-          Text('Spider-Man has spider-like abilities including superhuman strength and the ability to cling to most surfaces.',style: TextStyle(color: Colors.grey,),textAlign: TextAlign.center,),
+          Text(data['title'],style: TextStyle(fontWeight: FontWeight.bold,fontSize: 21),),
+          Text(data["description"],style: TextStyle(color: Colors.grey,),textAlign: TextAlign.center,),
           ],
           
           ),
