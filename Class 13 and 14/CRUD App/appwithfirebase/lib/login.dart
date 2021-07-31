@@ -1,3 +1,4 @@
+import 'package:appwithfirebase/register.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -35,16 +36,25 @@ class _UserLoginState extends State<UserLogin> {
         print(user["username"]);
         print(user["email"]);
 
-        Navigator.of(context).pushNamed('/home');
+        Navigator.of(context).pushNamed('/home',arguments: user);
       } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
+          showDialog(context: context, builder: (BuildContext context){
+          return customErrorHandling('No user found for that email.');
+             });
         print('No user found for that email.');
       } else if (e.code == 'wrong-password') {
+         showDialog(context: context, builder: (BuildContext context){
+          return customErrorHandling('Wrong password provided for that user.');
+             });
         print('Wrong password provided for that user.');
       }
       } 
        catch (e) {
         print('ERROR: '+ e.code);
+           showDialog(context: context, builder: (BuildContext context){
+          return customErrorHandling(e?.message);
+             });
       }
   }
     return Scaffold(
@@ -78,6 +88,15 @@ class _UserLoginState extends State<UserLogin> {
                     labelText: 'Enter your Password'
                   ),
                 ),
+                SizedBox(height: 20,),
+                Row(children: [
+                Text('If not an Account?',style: TextStyle(fontSize: 17),),
+                SizedBox(width: 2,),
+                GestureDetector(child: Text('Sign Up',
+                style: TextStyle(fontSize: 18,color: Colors.blue[300],fontWeight: FontWeight.bold))
+                 ,onTap: () => Navigator.of(context).push(new MaterialPageRoute(
+                    builder: (BuildContext context) => new UserRegister())),),
+                ],),
                 Container(
                   margin: EdgeInsets.only(top: 60),
                   width: 200,
@@ -93,4 +112,12 @@ class _UserLoginState extends State<UserLogin> {
       )
     );
   }
+}
+
+
+Widget customErrorHandling (msg) {
+
+  return  AlertDialog(content: Text(msg),);
+
+ 
 }
