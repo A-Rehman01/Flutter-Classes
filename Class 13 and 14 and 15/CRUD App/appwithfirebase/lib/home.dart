@@ -22,7 +22,9 @@ Stream postsStream = FirebaseFirestore.instance.collection('posts').snapshots();
       final TextEditingController descriptionController = TextEditingController();
       String imagePath ='';
   @override
- void pickerHandler  () async {
+ 
+  Widget build(BuildContext context) {
+    void pickerHandler  () async {
        final ImagePicker _picker = ImagePicker();
     final  image = await _picker.getImage(source: ImageSource.gallery);
     setState(() {
@@ -84,7 +86,6 @@ Stream postsStream = FirebaseFirestore.instance.collection('posts').snapshots();
     ); 
    }
  }
-  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text('Dashboard'),),
       body: Container(
@@ -147,6 +148,8 @@ Stream postsStream = FirebaseFirestore.instance.collection('posts').snapshots();
                       children: snapshot.data.docs.map((DocumentSnapshot document) {
                       Map data = document.data() ;
                       // print(data);
+                      // print(document.id);
+                      data['id'] =document.id;
                         return  PostWidget(data:data,);
                       }).toList(),
                     );
